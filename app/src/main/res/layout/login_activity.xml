@@ -5,7 +5,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/igLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/crafty_girls"
+        android:text="@string/instragram"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="50sp" />
 
     <EditText
         android:id="@+id/etUsername"
@@ -13,10 +27,10 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:hint="@string/username"
-        android:layout_alignParentTop="true"
+        android:layout_below="@id/igLogo"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="150dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"/>
 
@@ -29,7 +43,7 @@
         android:layout_below="@id/etUsername"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="16dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
 
@@ -41,6 +55,21 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:text="Login"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="10dp"
+        android:backgroundTint="@color/black"/>
+
+    <Button
+        android:id="@+id/btnSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnLogin"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:backgroundTint="@color/black"
+        android:text="@string/signup" />
 </RelativeLayout>

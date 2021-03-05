@@ -1,5 +1,6 @@
 package com.example.parstagram;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,6 +15,7 @@ import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -21,10 +23,14 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etUsername;
     private EditText etPassword;
     private Button btnLogin;
+    private Button btnSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Show Actionbar
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_bar);
         setContentView(R.layout.login_activity);
 
         if (ParseUser.getCurrentUser() != null)
@@ -34,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         etUsername      = findViewById(R.id.etUsername);
         etPassword      = findViewById(R.id.etPassword);
         btnLogin        = findViewById(R.id.btnLogin);
+        btnSignUp       = findViewById(R.id.btnSignUp);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +49,13 @@ public class LoginActivity extends AppCompatActivity {
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
                 loginUser(username, password);
+            }
+        });
+
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signUp(etUsername.getText().toString(), etPassword.getText().toString());
             }
         });
     }
@@ -69,6 +83,31 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    /*
+     * Name         : signUp
+     * Parameters   : New Username and New Password
+     * Description  : Signup with a new username (does not check to see if username is taken)
+     * Return       : void
+     */
+    private void signUp(String username, String password){
+        ParseUser parseUser = new ParseUser();
+        parseUser.setUsername(username);
+        parseUser.setPassword(password);
+        parseUser.signUpInBackground(new SignUpCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e != null){
+                    Log.i(TAG, "Successful SignUp");
+                    goMainActivity();
+                }else
+                    Log.e(TAG, "Unsuccessful Sigup");
+            }
+        });
+    }
+
+
 
     /*
      * Name         : goMainActivity
